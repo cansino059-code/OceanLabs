@@ -5,84 +5,137 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ocean Labs | Web Design & Automation Studio</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #050505; color: #f5f5f5; }
-    .bg-grid { background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px); background-size: 24px 24px; }
-    .glass-card { background: rgba(18, 18, 20, 0.75); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); }
-    .glass-card:hover { border-color: rgba(16, 185, 129, 0.3); transform: translateY(-2px); }
-    input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 20px; height: 20px; border-radius: 50%; background: #10b981; cursor: pointer; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #030304; color: #f5f5f5; overflow-x: hidden; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+    .bg-grid { background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px); background-size: 28px 28px; }
+    
+    /* Glassmorphism 2.0 con Spotlight */
+    .spotlight-card {
+      position: relative;
+      background: rgba(13, 13, 16, 0.75);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+      overflow: hidden;
+      transition: transform 0.2s ease-out, border-color 0.3s ease;
+      transform-style: preserve-3d;
+    }
+    .spotlight-card::before {
+      content: '';
+      position: absolute;
+      top: var(--mouse-y, -100px);
+      left: var(--mouse-x, -100px);
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.25) 0%, transparent 70%);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      opacity: 0;
+    }
+    .spotlight-card:hover::before { opacity: 1; }
+    .spotlight-card:hover { border-color: rgba(16, 185, 129, 0.4); }
+
+    /* Custom Sliders */
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%;
+      background: #10b981; border: 3px solid #000; cursor: pointer; box-shadow: 0 0 10px rgba(16, 185, 129, 0.8);
+    }
+    
+    /* Glow Pulse Animation */
+    .glow-pulse { box-shadow: 0 0 20px rgba(16, 185, 129, 0.15); }
   </style>
 </head>
-<body class="bg-grid min-h-screen text-zinc-100 antialiased pb-20">
+<body class="bg-grid min-h-screen text-zinc-100 antialiased pb-24 selection:bg-emerald-500 selection:text-black">
 
-  <!-- Header Superior -->
-  <header class="sticky top-0 z-50 glass-card border-b border-zinc-800/80 px-6 py-4 mb-8">
+  <!-- Glow De Fondo Superior -->
+  <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-emerald-500/10 blur-[140px] pointer-events-none rounded-full"></div>
+
+  <!-- Header Superior con Status de Red en Vivo -->
+  <header class="sticky top-0 z-50 backdrop-blur-xl bg-black/60 border-b border-zinc-800/80 px-6 py-4 mb-8">
     <div class="max-w-6xl mx-auto flex justify-between items-center">
       <div class="flex items-center gap-3">
-        <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-bold text-sm shadow-inner">
+        <div class="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-bold text-sm shadow-[0_0_15px_rgba(16,185,129,0.2)]">
           OL
         </div>
-        <span class="font-bold text-lg tracking-tight text-white">OCEAN <span class="text-emerald-400 font-light">LABS</span></span>
+        <span class="font-extrabold text-lg tracking-tight text-white">OCEAN <span class="text-emerald-400 font-light">LABS</span></span>
       </div>
+      
+      <!-- Live Node Status -->
       <div class="flex items-center gap-3">
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-800/60 text-emerald-400 text-xs font-medium">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Salta, Argentina
+        <div class="hidden sm:flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-[11px] font-mono text-zinc-400">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+          SALTA_NODE: <span class="text-emerald-400 font-bold">12ms</span>
+        </div>
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-800/60 text-emerald-400 text-xs font-semibold">
+          ● v2.4 Global Standard
         </span>
       </div>
     </div>
   </header>
 
-  <main class="max-w-6xl mx-auto px-4 md:px-6 space-y-12">
+  <main class="max-w-6xl mx-auto px-4 md:px-6 space-y-12 relative z-10">
 
-    <!-- Hero Section -->
-    <div class="relative rounded-3xl overflow-hidden border border-zinc-800 glass-card p-8 md:p-12">
-      <div class="relative z-10 max-w-3xl">
-        <span class="px-3 py-1.5 rounded-md bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-semibold tracking-wide uppercase">
-          Digital Experiences & Automation Architecture
-        </span>
-        <h1 class="text-4xl md:text-6xl font-extrabold mt-4 tracking-tight text-white leading-tight">
-          Diseño Web de Élite & Automatización Comercial.
+    <!-- Hero Section con Tipografía de Gran Impacto -->
+    <div class="spotlight-card p-8 md:p-14 glow-pulse">
+      <div class="max-w-3xl space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-mono font-semibold uppercase tracking-wider">
+          <svg class="w-3.5 h-3.5 text-emerald-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          Next-Gen Web Architecture & AI Workflows
+        </div>
+        <h1 class="text-4xl md:text-7xl font-black tracking-tight text-white leading-[1.08]">
+          Diseño Web de Élite & <span class="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">Automatización.</span>
         </h1>
-        <p class="text-zinc-400 mt-4 text-base md:text-lg leading-relaxed">
-          Infraestructura digital de alto rendimiento (Bento Grid / Dark Luxe) acoplada a embudos automatizados de captura directa por WhatsApp para empresas líderes en Salta.
+        <p class="text-zinc-400 text-base md:text-xl font-normal leading-relaxed pt-2">
+          Construimos interfaces ultrarrápidas (Bento Grid / Dark Luxe) integradas a sistemas inteligentes de conversión instantánea por WhatsApp para negocios líderes en Salta.
         </p>
       </div>
     </div>
 
-    <!-- CALCULADORA DE IMPACTO / PERDIDA DE CLIENTES (INTERACTIVA) -->
-    <div class="glass-card p-6 md:p-8 rounded-3xl border border-zinc-800/80 space-y-6">
-      <div class="flex flex-col md:flex-row justify-between md:items-center gap-2">
+    <!-- COMPARADOR ANTES VS DESPUÉS (INTERACTIVO - SPLIT SLIDER) -->
+    <div class="spotlight-card p-6 md:p-8 space-y-4">
+      <div class="flex flex-col md:flex-row justify-between md:items-center gap-2 border-b border-zinc-800 pb-4">
         <div>
-          <span class="text-xs font-mono text-emerald-400 uppercase tracking-widest">● Simulador Financiero en Vivo</span>
-          <h2 class="text-2xl font-bold text-white mt-1">Calculadora de Fuga de Clientes</h2>
+          <span class="text-xs font-mono text-emerald-400 uppercase tracking-widest">● Comparativa Visual en Vivo</span>
+          <h2 class="text-2xl font-bold text-white mt-1">El Salto de Calidad Visual</h2>
         </div>
-        <span class="text-xs text-zinc-500">Deslizá para calcular tu pérdida actual</span>
+        <span class="text-xs text-zinc-500">Deslizá el control central para comparar</span>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-        <div class="md:col-span-2 space-y-4">
-          <label class="text-sm text-zinc-300 font-medium block">
-            Visitas estimadas por mes (Instagram, Ads, Google): <span id="visitsVal" class="text-emerald-400 font-bold text-base">1,500</span>
-          </label>
-          <input type="range" id="visitsSlider" min="300" max="10000" step="100" value="1500" class="w-full h-2 bg-zinc-800 rounded-lg appearance-none cursor-pointer">
-          <p class="text-xs text-zinc-500">Con webs lentas o sin embudo WhatsApp directo, se pierde un promedio del 60% del tráfico calificado.</p>
+      <div class="relative h-64 md:h-80 rounded-2xl overflow-hidden border border-zinc-800 select-none" id="splitBox">
+        <!-- Lado B: Ocean Labs (Fondo) -->
+        <div class="absolute inset-0 bg-zinc-950 flex flex-col justify-center items-center text-center p-6 bg-grid">
+          <span class="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono uppercase mb-2">Estándar Ocean Labs</span>
+          <h3 class="text-3xl font-extrabold text-white">Dark Luxe / Bento Grid 2026</h3>
+          <p class="text-zinc-400 text-xs mt-2 max-w-md">Carga en 0.4s | Cero fricción | Conversión direct-to-WhatsApp | Diseño para pantallas OLED.</p>
+          <div class="mt-4 px-4 py-2 bg-emerald-500 text-black font-extrabold text-xs rounded-xl shadow-lg shadow-emerald-500/20">
+            Respuesta Instantánea Activa
+          </div>
         </div>
 
-        <div class="bg-zinc-900/90 border border-zinc-800 p-6 rounded-2xl text-center space-y-1">
-          <span class="text-xs text-zinc-400 uppercase font-mono">Clientes Perdidos Estimados</span>
-          <div class="text-3xl font-extrabold text-red-400" id="lostClients">45 clientes/mes</div>
-          <p class="text-[11px] text-zinc-500 pt-1">Recuperables con la arquitectura Ocean Labs</p>
+        <!-- Lado A: Web Tradicional Salta (Superpuesto) -->
+        <div class="absolute inset-y-0 left-0 bg-zinc-900 border-r-2 border-emerald-400 flex flex-col justify-center items-center text-center p-6 overflow-hidden" id="splitLeft" style="width: 50%;">
+          <span class="px-3 py-1 rounded-full bg-red-950/80 border border-red-800/60 text-red-400 text-xs font-mono uppercase mb-2 whitespace-nowrap">Web Tradicional Salta</span>
+          <h3 class="text-3xl font-bold text-zinc-500 whitespace-nowrap">Plantilla Lenta de los 2010s</h3>
+          <p class="text-zinc-600 text-xs mt-2 max-w-md whitespace-nowrap">Carga en 4.2s | Formularios largos que nadie llena | Sin adaptación a celus.</p>
+          <div class="mt-4 px-4 py-2 bg-zinc-800 text-zinc-500 font-bold text-xs rounded-xl border border-zinc-700 whitespace-nowrap">
+            "Envíanos un Mail..."
+          </div>
         </div>
+
+        <!-- Input Slider Deslizable -->
+        <input type="range" min="0" max="100" value="50" class="absolute inset-0 opacity-0 cursor-ew-resize w-full h-full z-30" id="splitRange">
       </div>
     </div>
 
-    <!-- SECTOR DEMOS EN VIVO (3 OPCIONES) -->
+    <!-- SECTOR DEMOS EN VIVO (BENTO GRID INTERACTIVO 3D) -->
     <div class="space-y-4">
       <div class="flex justify-between items-center border-b border-zinc-800 pb-4">
         <div>
-          <h2 class="text-2xl font-bold text-white">Muestras Interactivas por Industria</h2>
-          <p class="text-xs text-zinc-400 mt-1">Tocá cualquier prototipo para ver la experiencia completa:</p>
+          <h2 class="text-2xl font-bold text-white">Muestras Tácticas por Industria</h2>
+          <p class="text-xs text-zinc-400 mt-1">Explorá los prototipos en vivo diseñados para conversión:</p>
         </div>
         <span class="text-xs font-mono text-emerald-400 uppercase tracking-widest">● Live Prototypes</span>
       </div>
@@ -90,46 +143,46 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
         <!-- Demo 1: Salud -->
-        <div class="relative glass-card rounded-3xl overflow-hidden border border-zinc-800 p-6 flex flex-col justify-between transition-all group">
+        <div class="spotlight-card p-6 flex flex-col justify-between group">
           <div>
             <div class="flex justify-between items-center mb-4">
               <span class="px-2.5 py-1 rounded-full bg-emerald-950/80 border border-emerald-800/60 text-emerald-400 text-[11px] font-semibold">Salud & Estética</span>
               <span class="text-xs font-mono text-zinc-500">01</span>
             </div>
             <h3 class="text-xl font-bold text-white">Centro Médico & Salud</h3>
-            <p class="text-zinc-400 text-xs mt-2 leading-relaxed">Guardia 24/7, cartilla médica interactiva y asignación instantánea de turnos.</p>
+            <p class="text-zinc-400 text-xs mt-2 leading-relaxed">Guardia 24/7, cartilla médica interactiva y asignación instantánea de turnos por WhatsApp.</p>
           </div>
-          <a href="clinica.html" class="mt-6 w-full py-3 bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold text-xs rounded-xl flex items-center justify-center gap-2 transition-all">
+          <a href="clinica.html" class="mt-6 w-full py-3.5 bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold text-xs rounded-xl flex items-center justify-center gap-2 transition-all shadow-md shadow-emerald-500/10">
             Probar Demo Salud ➔
           </a>
         </div>
 
         <!-- Demo 2: Estudio Jurídico -->
-        <div class="relative glass-card rounded-3xl overflow-hidden border border-zinc-800 p-6 flex flex-col justify-between transition-all group">
+        <div class="spotlight-card p-6 flex flex-col justify-between group">
           <div>
             <div class="flex justify-between items-center mb-4">
               <span class="px-2.5 py-1 rounded-full bg-blue-950/80 border border-blue-800/60 text-blue-400 text-[11px] font-semibold">Legal & Finanzas</span>
               <span class="text-xs font-mono text-zinc-500">02</span>
             </div>
             <h3 class="text-xl font-bold text-white">Estudio Jurídico / Contable</h3>
-            <p class="text-zinc-400 text-xs mt-2 leading-relaxed">Presentación institucional de élite, áreas de práctica y consulta confidencial.</p>
+            <p class="text-zinc-400 text-xs mt-2 leading-relaxed">Presentación institucional de élite, áreas de práctica y consulta confidencial con socios.</p>
           </div>
-          <a href="estudio.html" class="mt-6 w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-xs rounded-xl flex items-center justify-center gap-2 transition-all">
+          <a href="estudio.html" class="mt-6 w-full py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-xs rounded-xl flex items-center justify-center gap-2 transition-all shadow-md shadow-blue-600/10">
             Probar Demo Corporativo ➔
           </a>
         </div>
 
-        <!-- Demo 3: Inmobiliaria & Pozo -->
-        <div class="relative glass-card rounded-3xl overflow-hidden border border-zinc-800 p-6 flex flex-col justify-between transition-all group">
+        <!-- Demo 3: Inmobiliaria -->
+        <div class="spotlight-card p-6 flex flex-col justify-between group">
           <div>
             <div class="flex justify-between items-center mb-4">
               <span class="px-2.5 py-1 rounded-full bg-amber-950/80 border border-amber-800/60 text-amber-400 text-[11px] font-semibold">Bienes Raíces</span>
               <span class="text-xs font-mono text-zinc-500">03</span>
             </div>
             <h3 class="text-xl font-bold text-white">Desarrollos & Inmobiliaria</h3>
-            <p class="text-zinc-400 text-xs mt-2 leading-relaxed">Fichas de propiedades premium, recorridos virtuales e inversión en pozo.</p>
+            <p class="text-zinc-400 text-xs mt-2 leading-relaxed">Fichas de propiedades premium, catálogo interactivo e inversión de pozo en Salta.</p>
           </div>
-          <a href="inmobiliaria.html" class="mt-6 w-full py-3 bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-xs rounded-xl flex items-center justify-center gap-2 transition-all">
+          <a href="inmobiliaria.html" class="mt-6 w-full py-3.5 bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-xs rounded-xl flex items-center justify-center gap-2 transition-all shadow-md shadow-amber-500/10">
             Probar Demo Inmuebles ➔
           </a>
         </div>
@@ -137,52 +190,69 @@
       </div>
     </div>
 
-    <!-- SIMULADOR INTERACTIVO CHATBOT IA -->
-    <div class="glass-card p-6 md:p-8 rounded-3xl border border-zinc-800/80 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-      <div>
-        <span class="text-xs font-mono text-emerald-400 uppercase tracking-widest">● Embudo Automatizado</span>
-        <h2 class="text-2xl font-bold text-white mt-1">Chatbot de IA en Vivo</h2>
-        <p class="text-zinc-400 text-sm mt-3 leading-relaxed">
-          Probá cómo respondería tu negocio de manera inmediata ante la consulta de un cliente un domingo a las 3 AM:
-        </p>
-        <div class="mt-4 flex gap-2">
-          <button onclick="simBot('turno')" class="px-3 py-2 bg-zinc-800 hover:bg-zinc-700 text-xs font-semibold rounded-lg border border-zinc-700">Simular "Consulta Turno"</button>
-          <button onclick="simBot('precio')" class="px-3 py-2 bg-zinc-800 hover:bg-zinc-700 text-xs font-semibold rounded-lg border border-zinc-700">Simular "Precios / Honorarios"</button>
+    <!-- TERMINAL EN VIVO / CONSOLA AUTOMATIZADA (LIVE TERMINAL) -->
+    <div class="spotlight-card p-6 md:p-8 space-y-4">
+      <div class="flex justify-between items-center border-b border-zinc-800 pb-3">
+        <div class="flex items-center gap-2">
+          <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+          <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+          <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+          <span class="text-xs font-mono text-zinc-500 ml-2">oceanlabs-engine.sh — bash</span>
         </div>
+        <span class="text-xs font-mono text-emerald-400">STATUS: ACTIVE</span>
       </div>
 
-      <div class="bg-black/90 border border-zinc-800 p-4 rounded-2xl font-mono text-xs space-y-3 min-h-[160px] flex flex-col justify-center">
-        <div class="text-zinc-500">// Estado del bot: <span class="text-emerald-400">ONLINE 24/7</span></div>
-        <div id="botOutput" class="text-zinc-300 bg-zinc-900/80 p-3 rounded-lg border border-zinc-800">
-          Tocá una de las opciones de la izquierda para simular la respuesta instantánea del bot...
-        </div>
+      <div class="bg-black/90 p-4 rounded-xl font-mono text-xs text-zinc-300 space-y-2 overflow-x-auto min-h-[140px]" id="terminalOutput">
+        <p class="text-zinc-500">&gt; Initializing OceanLabs Automation Core v2.4...</p>
+        <p class="text-emerald-400">&gt; WhatsApp API Gateway Connected [200 OK]</p>
+        <p class="text-cyan-400">&gt; Traffic Router: 0% data loss detected.</p>
+        <p class="text-zinc-400" id="liveText">&gt; Listening for inbound leads in Salta, Argentina...</p>
       </div>
     </div>
 
   </main>
 
+  <!-- Script para Efectos Interactivos Avanzados -->
   <script>
-    // Lógica Calculadora
-    const slider = document.getElementById('visitsSlider');
-    const visitsVal = document.getElementById('visitsVal');
-    const lostClients = document.getElementById('lostClients');
+    // 1. Spotlight Cursor Effect
+    document.querySelectorAll('.spotlight-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+      });
+    });
 
-    slider.oninput = function() {
-      const val = parseInt(this.value);
-      visitsVal.innerHTML = val.toLocaleString();
-      const lost = Math.round(val * 0.03); // 3% conversión no capturada
-      lostClients.innerHTML = lost + " clientes/mes";
-    };
-
-    // Lógica Simulador Bot
-    function simBot(tipo) {
-      const out = document.getElementById('botOutput');
-      if(tipo === 'turno') {
-        out.innerHTML = '<span class="text-emerald-400">OceanBot:</span> "¡Hola! 👋 Tenemos turnos disponibles con el Dr. Valenzuela para este Jueves a las 16:30 hs. ¿Te lo reservo a este número?"';
-      } else if(tipo === 'precio') {
-        out.innerHTML = '<span class="text-blue-400">OceanBot:</span> "¡Hola! Te adjunto el PDF interactivo con nuestro esquema de honorarios corporativos y la cobertura de prepagas. ¿Querés coordinar una llamada de 5 min?"';
-      }
+    // 2. Split Range Comparador
+    const range = document.getElementById('splitRange');
+    const leftBox = document.getElementById('splitLeft');
+    if(range && leftBox) {
+      range.addEventListener('input', (e) => {
+        leftBox.style.width = `${e.target.value}%`;
+      });
     }
+
+    // 3. Live Terminal Output Simulation
+    const terminal = document.getElementById('terminalOutput');
+    const logs = [
+      "> Patient lead captured -> Auto-forwarded to Doctor WhatsApp [0.2s]",
+      "> Corporate inquiry received -> Priority PDF sent [0.1s]",
+      "> San Lorenzo property brochure requested -> Lead qualified [OK]",
+      "> Page Speed Index verified: 99/100 Mobile Grade"
+    ];
+    let idx = 0;
+    setInterval(() => {
+      const p = document.createElement('p');
+      p.className = "text-emerald-300 transition-all";
+      p.innerText = logs[idx % logs.length];
+      terminal.appendChild(p);
+      if(terminal.childNodes.length > 7) {
+        terminal.removeChild(terminal.childNodes[1]);
+      }
+      idx++;
+    }, 3000);
   </script>
 
 </body>
