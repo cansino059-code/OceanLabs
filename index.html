@@ -9,17 +9,18 @@
   <style>
     body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #050505; color: #f5f5f5; }
     .bg-grid { background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px); background-size: 24px 24px; }
-    .glass-card { background: rgba(18, 18, 20, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
-    .glass-card:hover { border-color: rgba(255, 255, 255, 0.2); transform: translateY(-2px); }
+    .glass-card { background: rgba(18, 18, 20, 0.75); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); }
+    .glass-card:hover { border-color: rgba(16, 185, 129, 0.3); transform: translateY(-2px); }
+    input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 20px; height: 20px; border-radius: 50%; background: #10b981; cursor: pointer; }
   </style>
 </head>
-<body class="bg-grid min-h-screen text-zinc-100 antialiased pb-16">
+<body class="bg-grid min-h-screen text-zinc-100 antialiased pb-20">
 
   <!-- Header Superior -->
   <header class="sticky top-0 z-50 glass-card border-b border-zinc-800/80 px-6 py-4 mb-8">
     <div class="max-w-6xl mx-auto flex justify-between items-center">
       <div class="flex items-center gap-3">
-        <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-bold text-sm">
+        <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-bold text-sm shadow-inner">
           OL
         </div>
         <span class="font-bold text-lg tracking-tight text-white">OCEAN <span class="text-emerald-400 font-light">LABS</span></span>
@@ -32,87 +33,157 @@
     </div>
   </header>
 
-  <main class="max-w-6xl mx-auto px-4 md:px-6 space-y-8">
+  <main class="max-w-6xl mx-auto px-4 md:px-6 space-y-12">
 
-    <!-- Hero Section de la Agencia -->
+    <!-- Hero Section -->
     <div class="relative rounded-3xl overflow-hidden border border-zinc-800 glass-card p-8 md:p-12">
-      <div class="relative z-10 max-w-2xl">
+      <div class="relative z-10 max-w-3xl">
         <span class="px-3 py-1.5 rounded-md bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-semibold tracking-wide uppercase">
-          Digital Experiences & Automation
+          Digital Experiences & Automation Architecture
         </span>
         <h1 class="text-4xl md:text-6xl font-extrabold mt-4 tracking-tight text-white leading-tight">
-          Diseño Web de Élite & Automatización.
+          Diseño Web de Élite & Automatización Comercial.
         </h1>
         <p class="text-zinc-400 mt-4 text-base md:text-lg leading-relaxed">
-          Transformamos la presencia digital de marcas y profesionales en Salta mediante interfaces Bento Grid / Dark Luxe y sistemas de captura instantánea por WhatsApp.
+          Infraestructura digital de alto rendimiento (Bento Grid / Dark Luxe) acoplada a embudos automatizados de captura directa por WhatsApp para empresas líderes en Salta.
         </p>
       </div>
     </div>
 
-    <!-- Título de Selección de Demos -->
-    <div class="pt-4 border-t border-zinc-800 flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
-      <div>
-        <h2 class="text-2xl font-bold text-white">Muestras Interactivas en Vivo</h2>
-        <p class="text-xs text-zinc-400 mt-1">Seleccioná una de nuestras maquetas tácticas para explorar la experiencia de usuario:</p>
+    <!-- CALCULADORA DE IMPACTO / PERDIDA DE CLIENTES (INTERACTIVA) -->
+    <div class="glass-card p-6 md:p-8 rounded-3xl border border-zinc-800/80 space-y-6">
+      <div class="flex flex-col md:flex-row justify-between md:items-center gap-2">
+        <div>
+          <span class="text-xs font-mono text-emerald-400 uppercase tracking-widest">● Simulador Financiero en Vivo</span>
+          <h2 class="text-2xl font-bold text-white mt-1">Calculadora de Fuga de Clientes</h2>
+        </div>
+        <span class="text-xs text-zinc-500">Deslizá para calcular tu pérdida actual</span>
       </div>
-      <span class="text-xs font-mono text-emerald-400 uppercase tracking-widest">● Bento Grid Demos</span>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+        <div class="md:col-span-2 space-y-4">
+          <label class="text-sm text-zinc-300 font-medium block">
+            Visitas estimadas por mes (Instagram, Ads, Google): <span id="visitsVal" class="text-emerald-400 font-bold text-base">1,500</span>
+          </label>
+          <input type="range" id="visitsSlider" min="300" max="10000" step="100" value="1500" class="w-full h-2 bg-zinc-800 rounded-lg appearance-none cursor-pointer">
+          <p class="text-xs text-zinc-500">Con webs lentas o sin embudo WhatsApp directo, se pierde un promedio del 60% del tráfico calificado.</p>
+        </div>
+
+        <div class="bg-zinc-900/90 border border-zinc-800 p-6 rounded-2xl text-center space-y-1">
+          <span class="text-xs text-zinc-400 uppercase font-mono">Clientes Perdidos Estimados</span>
+          <div class="text-3xl font-extrabold text-red-400" id="lostClients">45 clientes/mes</div>
+          <p class="text-[11px] text-zinc-500 pt-1">Recuperables con la arquitectura Ocean Labs</p>
+        </div>
+      </div>
     </div>
 
-    <!-- Selector de Demos en Vivo (2 Opciones de Alto Impacto) -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- SECTOR DEMOS EN VIVO (3 OPCIONES) -->
+    <div class="space-y-4">
+      <div class="flex justify-between items-center border-b border-zinc-800 pb-4">
+        <div>
+          <h2 class="text-2xl font-bold text-white">Muestras Interactivas por Industria</h2>
+          <p class="text-xs text-zinc-400 mt-1">Tocá cualquier prototipo para ver la experiencia completa:</p>
+        </div>
+        <span class="text-xs font-mono text-emerald-400 uppercase tracking-widest">● Live Prototypes</span>
+      </div>
 
-      <!-- Opción 1: Salud & Clínicas -->
-      <div class="relative glass-card rounded-3xl overflow-hidden border border-zinc-800 p-6 md:p-8 flex flex-col justify-between transition-all group">
-        <div class="absolute inset-0 z-0 opacity-15 group-hover:opacity-25 transition-all bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=800&auto=format&fit=crop');"></div>
-        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent z-0"></div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-        <div class="relative z-10">
-          <div class="flex justify-between items-center mb-4">
-            <span class="px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-800/60 text-emerald-400 text-xs font-semibold">
-              Salud & Medicina Privada
-            </span>
-            <span class="text-xs font-mono text-zinc-500">01 / DEMO</span>
+        <!-- Demo 1: Salud -->
+        <div class="relative glass-card rounded-3xl overflow-hidden border border-zinc-800 p-6 flex flex-col justify-between transition-all group">
+          <div>
+            <div class="flex justify-between items-center mb-4">
+              <span class="px-2.5 py-1 rounded-full bg-emerald-950/80 border border-emerald-800/60 text-emerald-400 text-[11px] font-semibold">Salud & Estética</span>
+              <span class="text-xs font-mono text-zinc-500">01</span>
+            </div>
+            <h3 class="text-xl font-bold text-white">Centro Médico & Salud</h3>
+            <p class="text-zinc-400 text-xs mt-2 leading-relaxed">Guardia 24/7, cartilla médica interactiva y asignación instantánea de turnos.</p>
           </div>
-          <h3 class="text-2xl font-bold text-white mt-2">Centro Médico & Consultorios</h3>
-          <p class="text-zinc-400 text-sm mt-2 leading-relaxed">
-            Diseñado para clínicas, centros estéticos y sanatorios. Incluye guardia 24/7, cartilla médica y reserva instantánea de turnos por WhatsApp.
-          </p>
+          <a href="clinica.html" class="mt-6 w-full py-3 bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold text-xs rounded-xl flex items-center justify-center gap-2 transition-all">
+            Probar Demo Salud ➔
+          </a>
         </div>
 
-        <div class="relative z-10 mt-8">
-          <a href="clinica.html" class="w-full py-4 bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold rounded-2xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-emerald-500/20">
-            Explorar Demo Medicina ➔
+        <!-- Demo 2: Estudio Jurídico -->
+        <div class="relative glass-card rounded-3xl overflow-hidden border border-zinc-800 p-6 flex flex-col justify-between transition-all group">
+          <div>
+            <div class="flex justify-between items-center mb-4">
+              <span class="px-2.5 py-1 rounded-full bg-blue-950/80 border border-blue-800/60 text-blue-400 text-[11px] font-semibold">Legal & Finanzas</span>
+              <span class="text-xs font-mono text-zinc-500">02</span>
+            </div>
+            <h3 class="text-xl font-bold text-white">Estudio Jurídico / Contable</h3>
+            <p class="text-zinc-400 text-xs mt-2 leading-relaxed">Presentación institucional de élite, áreas de práctica y consulta confidencial.</p>
+          </div>
+          <a href="estudio.html" class="mt-6 w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-xs rounded-xl flex items-center justify-center gap-2 transition-all">
+            Probar Demo Corporativo ➔
           </a>
+        </div>
+
+        <!-- Demo 3: Inmobiliaria & Pozo -->
+        <div class="relative glass-card rounded-3xl overflow-hidden border border-zinc-800 p-6 flex flex-col justify-between transition-all group">
+          <div>
+            <div class="flex justify-between items-center mb-4">
+              <span class="px-2.5 py-1 rounded-full bg-amber-950/80 border border-amber-800/60 text-amber-400 text-[11px] font-semibold">Bienes Raíces</span>
+              <span class="text-xs font-mono text-zinc-500">03</span>
+            </div>
+            <h3 class="text-xl font-bold text-white">Desarrollos & Inmobiliaria</h3>
+            <p class="text-zinc-400 text-xs mt-2 leading-relaxed">Fichas de propiedades premium, recorridos virtuales e inversión en pozo.</p>
+          </div>
+          <a href="inmobiliaria.html" class="mt-6 w-full py-3 bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-xs rounded-xl flex items-center justify-center gap-2 transition-all">
+            Probar Demo Inmuebles ➔
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SIMULADOR INTERACTIVO CHATBOT IA -->
+    <div class="glass-card p-6 md:p-8 rounded-3xl border border-zinc-800/80 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+      <div>
+        <span class="text-xs font-mono text-emerald-400 uppercase tracking-widest">● Embudo Automatizado</span>
+        <h2 class="text-2xl font-bold text-white mt-1">Chatbot de IA en Vivo</h2>
+        <p class="text-zinc-400 text-sm mt-3 leading-relaxed">
+          Probá cómo respondería tu negocio de manera inmediata ante la consulta de un cliente un domingo a las 3 AM:
+        </p>
+        <div class="mt-4 flex gap-2">
+          <button onclick="simBot('turno')" class="px-3 py-2 bg-zinc-800 hover:bg-zinc-700 text-xs font-semibold rounded-lg border border-zinc-700">Simular "Consulta Turno"</button>
+          <button onclick="simBot('precio')" class="px-3 py-2 bg-zinc-800 hover:bg-zinc-700 text-xs font-semibold rounded-lg border border-zinc-700">Simular "Precios / Honorarios"</button>
         </div>
       </div>
 
-      <!-- Opción 2: Corporativo & Estudios -->
-      <div class="relative glass-card rounded-3xl overflow-hidden border border-zinc-800 p-6 md:p-8 flex flex-col justify-between transition-all group">
-        <div class="absolute inset-0 z-0 opacity-15 group-hover:opacity-25 transition-all bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop');"></div>
-        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent z-0"></div>
-
-        <div class="relative z-10">
-          <div class="flex justify-between items-center mb-4">
-            <span class="px-3 py-1 rounded-full bg-blue-950/80 border border-blue-800/60 text-blue-400 text-xs font-semibold">
-              Legal & Financiero
-            </span>
-            <span class="text-xs font-mono text-zinc-500">02 / DEMO</span>
-          </div>
-          <h3 class="text-2xl font-bold text-white mt-2">Estudio Jurídico & Contable</h3>
-          <p class="text-zinc-400 text-sm mt-2 leading-relaxed">
-            Especial para firmas de abogados, contadores y consultoras. Estética sobria, métricas de trayectoria y canal de consulta confidencial.
-          </p>
-        </div>
-
-        <div class="relative z-10 mt-8">
-          <a href="estudio.html" class="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white font-extrabold rounded-2xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-blue-600/20">
-            Explorar Demo Corporativo ➔
-          </a>
+      <div class="bg-black/90 border border-zinc-800 p-4 rounded-2xl font-mono text-xs space-y-3 min-h-[160px] flex flex-col justify-center">
+        <div class="text-zinc-500">// Estado del bot: <span class="text-emerald-400">ONLINE 24/7</span></div>
+        <div id="botOutput" class="text-zinc-300 bg-zinc-900/80 p-3 rounded-lg border border-zinc-800">
+          Tocá una de las opciones de la izquierda para simular la respuesta instantánea del bot...
         </div>
       </div>
-
     </div>
 
   </main>
+
+  <script>
+    // Lógica Calculadora
+    const slider = document.getElementById('visitsSlider');
+    const visitsVal = document.getElementById('visitsVal');
+    const lostClients = document.getElementById('lostClients');
+
+    slider.oninput = function() {
+      const val = parseInt(this.value);
+      visitsVal.innerHTML = val.toLocaleString();
+      const lost = Math.round(val * 0.03); // 3% conversión no capturada
+      lostClients.innerHTML = lost + " clientes/mes";
+    };
+
+    // Lógica Simulador Bot
+    function simBot(tipo) {
+      const out = document.getElementById('botOutput');
+      if(tipo === 'turno') {
+        out.innerHTML = '<span class="text-emerald-400">OceanBot:</span> "¡Hola! 👋 Tenemos turnos disponibles con el Dr. Valenzuela para este Jueves a las 16:30 hs. ¿Te lo reservo a este número?"';
+      } else if(tipo === 'precio') {
+        out.innerHTML = '<span class="text-blue-400">OceanBot:</span> "¡Hola! Te adjunto el PDF interactivo con nuestro esquema de honorarios corporativos y la cobertura de prepagas. ¿Querés coordinar una llamada de 5 min?"';
+      }
+    }
+  </script>
+
 </body>
 </html>
