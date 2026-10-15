@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ocean Labs | Web Design & Automation Studio</title>
+    <!-- Tailwind CSS CDN para un diseño ultra rápido y moderno -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkbg: '#0a0a0a',
+                        cardbg: '#141414',
+                        bordercolor: '#262626',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-darkbg text-zinc-100 min-h-screen selection:bg-zinc-700 selection:text-white">
+
+    <!-- Header / Navbar Minimal -->
+    <header class="max-w-6xl mx-auto px-6 py-8 flex justify-between items-center border-b border-bordercolor">
+        <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded bg-zinc-800 flex items-center justify-center font-bold text-sm tracking-wider border border-zinc-700">OL</div>
+            <span class="font-semibold tracking-wide text-lg">OCEAN LABS</span>
+        </div>
+        <div class="text-xs text-zinc-400 uppercase tracking-widest hidden sm:block">
+            Salta • Global Standards
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="max-w-6xl mx-auto px-6 py-16 lg:py-24">
+        <div class="max-w-3xl mb-16">
+            <div class="inline-block px-3 py-1 mb-4 rounded-full bg-zinc-900 border border-bordercolor text-xs text-zinc-400 tracking-wide">
+                Boutique Tech Studio
+            </div>
+            <h1 class="text-4xl sm:text-6xl font-bold tracking-tight mb-6 leading-[1.1]">
+                Digital experiences built to global standards.
+            </h1>
+            <p class="text-lg text-zinc-400 font-light leading-relaxed">
+                Importamos la estética y tecnología de EE. UU. y Europa para transformar la presencia digital y automatizar los procesos de empresas exigentes en Salta.
+            </p>
+        </div>
+
+        <!-- Bento Grid Layout -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <!-- Card 1: Performance / Velocidad -->
+            <div class="md:col-span-2 bg-cardbg border border-bordercolor rounded-2xl p-8 flex flex-col justify-between hover:border-zinc-700 transition duration-300">
+                <div>
+                    <div class="text-xs text-zinc-500 uppercase tracking-widest mb-2">Engineering & Speed</div>
+                    <h3 class="text-2xl font-semibold mb-3">Sub-second load times & modern architecture.</h3>
+                    <p class="text-zinc-400 text-sm leading-relaxed mb-6">
+                        Desarrollamos sitios web ultra rápidos que no solo se ven elegantes, sino que convierten visitantes en clientes de manera automática.
+                    </p>
+                </div>
+                <div class="bg-darkbg border border-bordercolor rounded-xl p-4 flex items-center justify-between text-sm">
+                    <span class="text-zinc-400 font-mono">Performance Score</span>
+                    <span class="text-emerald-400 font-mono font-bold">100 / 100</span>
+                </div>
+            </div>
+
+            <!-- Card 2: WhatsApp / Automation -->
+            <div class="bg-cardbg border border-bordercolor rounded-2xl p-8 flex flex-col justify-between hover:border-zinc-700 transition duration-300">
+                <div>
+                    <div class="text-xs text-zinc-500 uppercase tracking-widest mb-2">Automation</div>
+                    <h3 class="text-xl font-semibold mb-3">Smart Workflows</h3>
+                    <p class="text-zinc-400 text-sm leading-relaxed mb-6">
+                        Sistemas automatizados que captan leads y agendan turnos en WhatsApp 24/7 sin intervención humana.
+                    </p>
+                </div>
+                <span class="text-xs text-zinc-500 font-mono">Active Protocols →</span>
+            </div>
+
+            <!-- Card 3: Live Demos (El gancho principal) -->
+            <div class="bg-cardbg border border-bordercolor rounded-2xl p-8 flex flex-col justify-between hover:border-zinc-700 transition duration-300">
+                <div>
+                    <div class="text-xs text-zinc-500 uppercase tracking-widest mb-2">Showcase</div>
+                    <h3 class="text-xl font-semibold mb-3">Interactive Demos</h3>
+                    <p class="text-zinc-400 text-sm leading-relaxed mb-6">
+                        Explorá maquetas reales diseñadas para clínicas y estudios profesionales.
+                    </p>
+                </div>
+                <a href="#contacto" class="inline-flex items-center justify-center w-full py-3 rounded-xl bg-zinc-100 text-zinc-900 font-medium text-sm hover:bg-white transition">
+                    Ver Demos en Vivo
+                </a>
+            </div>
+
+            <!-- Card 4: Global Design Standard -->
+            <div class="md:col-span-2 bg-cardbg border border-bordercolor rounded-2xl p-8 flex flex-col justify-between hover:border-zinc-700 transition duration-300">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <div>
+                        <div class="text-xs text-zinc-500 uppercase tracking-widest mb-2">Direct Contact</div>
+                        <h3 class="text-2xl font-semibold">¿Listo para elevar tu negocio?</h3>
+                        <p class="text-zinc-400 text-sm mt-1">Hablemos directamente por WhatsApp para una asesoría de 10 minutos.</p>
+                    </div>
+                    <!-- Reemplazá el número de teléfono por el tuyo con formato internacional -->
+                    <a href="https://wa.me/5493870000000?text=Hola,%20vi%20la%20tarjeta%20de%20Ocean%20Labs%20y%20quiero%20ver%20las%20demos." target="_blank" class="px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-medium text-sm transition shrink-0">
+                        Abrir WhatsApp Business
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="max-w-6xl mx-auto px-6 py-8 border-t border-bordercolor mt-20 flex flex-col sm:flex-row justify-between items-center text-xs text-zinc-500">
+        <div>© 2026 Ocean Labs Studio. All rights reserved.</div>
+        <div class="mt-4 sm:mt-0 font-mono">Salta, Argentina</div>
+    </footer>
+
+</body>
+</html>
